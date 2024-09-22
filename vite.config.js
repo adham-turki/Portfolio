@@ -1,12 +1,13 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+// vite.config.js
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   build: {
-    rollupOptions: {
-      external: ['@sanity/client'],
-    },
+    // Remove or comment out this section if you don't want to exclude the module
+    // rollupOptions: {
+    //   external: ['@sanity/client'],
+    // },
   },
-})
+});
