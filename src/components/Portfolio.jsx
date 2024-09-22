@@ -1,7 +1,8 @@
 
 import PropTypes from 'prop-types';
 import matchify from '../assets/matchify.png'
-import { client } from './client';
+import { client,urlFor } from './client';
+
 import { FaHtml5, FaCss3Alt, FaReact, FaJsSquare, FaJava, FaNodeJs, FaPython, FaDatabase } from 'react-icons/fa';
 
 
@@ -57,8 +58,8 @@ const Portfolio = () => {
               techStack={project.techStack || []}
               liveLink={project.liveLink || '#'}
               repoLink={project.repoLink || '#'}
-              backgroundImage={project.image?.asset?.url || matchify} // Fallback to default image if not provided
-            />
+              backgroundImage={project.image ? urlFor(project.image.asset).url() : matchify} // Fallback to default image
+              />
           ))}
         </div>
       </section>
