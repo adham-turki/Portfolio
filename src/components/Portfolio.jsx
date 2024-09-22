@@ -7,7 +7,6 @@ import { FaHtml5, FaCss3Alt, FaReact, FaJsSquare, FaJava, FaNodeJs, FaPython, Fa
 
 
 const Portfolio = () => {
-  const [data, setData] = useState([]);
   const [projects, setProjects] = useState([]);
   useEffect(() => {
     client.fetch('*[_type == "project"] ').then((data) => setProjects(data));
@@ -81,36 +80,36 @@ const Portfolio = () => {
 };
 
 function SkillCard({ skill, level }) {
-
   const iconMap = {
-    HTML: <FaHtml5 className="text-orange-500 text-4xl" />,
-    CSS: <FaCss3Alt className="text-blue-500 text-4xl" />,
-    React: <FaReact className="text-cyan-500 text-4xl" />,
-    JavaScript: <FaJsSquare className="text-yellow-500 text-4xl" />,
-    Java: <FaJava className="text-red-500 text-4xl" />,
-    NodeJS: <FaNodeJs className="text-green-500 text-4xl" />,
-    Python: <FaPython className="text-blue-400 text-4xl" />,
-    MySQL: <FaDatabase className="text-orange-700 text-4xl" />,
-    'JavaFX': <FaJava className="text-purple-500 text-4xl" />, // Use the same icon for JavaFX
-    Redux: <FaReact className="text-red-500 text-4xl" />,
-    'Data Structures': <FaDatabase className="text-green-600 text-4xl" />, // Placeholder icon
-    Algorithms: <FaDatabase className="text-teal-600 text-4xl" />, // Placeholder icon
-    OOP: <FaJava className="text-orange-500 text-4xl" />, // Use Java icon for OOP
-    'OOP Design': <FaJava className="text-orange-500 text-4xl" />, // Same for OOP Design
+      HTML: <FaHtml5 className="text-orange-500 text-4xl" />,
+      CSS: <FaCss3Alt className="text-blue-500 text-4xl" />,
+      React: <FaReact className="text-cyan-500 text-4xl" />,
+      JavaScript: <FaJsSquare className="text-yellow-500 text-4xl" />,
+      Java: <FaJava className="text-red-500 text-4xl" />,
+      NodeJS: <FaNodeJs className="text-green-500 text-4xl" />,
+      Python: <FaPython className="text-blue-400 text-4xl" />,
+      MySQL: <FaDatabase className="text-orange-700 text-4xl" />,
+      JavaFX: <FaJava className="text-purple-500 text-4xl" />,
+      Redux: <FaReact className="text-red-500 text-4xl" />,
+      'Data Structures': <FaDatabase className="text-green-600 text-4xl" />,
+      Algorithms: <FaDatabase className="text-teal-600 text-4xl" />,
+      OOP: <FaJava className="text-orange-500 text-4xl" />,
+      'OOP Design': <FaJava className="text-orange-500 text-4xl" />,
   };
 
   return (
-    <div className="bg-gradient-to-r from-orange-100 to-orange-200 dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition-transform duration-300 ease-in-out">
-      <div className="flex items-center space-x-4">
-        {iconMap[skill]}
-        <div>
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{skill}</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Level: <span className="font-medium text-gray-800 dark:text-gray-200">{level}</span></p>
-        </div>
+      <div className="bg-gradient-to-r from-orange-100 to-orange-200 dark:bg-gray-800 p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition-transform duration-300 ease-in-out">
+          <div className="flex items-center space-x-2 md:space-x-4">
+              {iconMap[skill]}
+              <div>
+                  <h3 className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white mb-1">{skill}</h3>
+                  <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Level: <span className="font-medium text-gray-800 dark:text-gray-200">{level}</span></p>
+              </div>
+          </div>
       </div>
-    </div>
   );
 }
+
 
 function ProjectCard({ title, description, techStack, liveLink, repoLink, backgroundImage }) {
   return (
