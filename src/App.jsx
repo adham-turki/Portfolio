@@ -27,6 +27,12 @@ function App() {
     }
   }, []);
 
+  const handleViewCV = () => {
+    // Open the CV PDF in a new tab
+    window.open('https://drive.google.com/file/d/15249VthvSXgO65xtALJDHUL7uTE_zVzT/view?usp=sharing', '_blank');
+  };
+
+  
   return (
     <>
       <div className="animated-bg"></div>
@@ -52,8 +58,12 @@ function App() {
                   that solve real-world problems and delight users.
                 </h2>
                 <div className="flex-wrap gap-3 flex justify-center">
-                  <button className="button-primary">View CV</button>
-                  <button className="button-secondary">Hire Me</button>
+                  <button className="button-primary" onClick={handleViewCV}>
+                    View CV
+                  </button>
+                  <button className="button-secondary" onClick={() => document.getElementById('contactme').scrollIntoView({ behavior: 'smooth' })}>
+  Hire Me
+</button>
                 </div>
               </div>
             </div>
