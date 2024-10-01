@@ -45,7 +45,7 @@ function App() {
               className="relative bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden"
               style={{
                 backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)), url(${adham})`,
-                height: '80vh',
+                height: '93vh',
               }}
             >
               <div className="flex flex-col items-center justify-center h-full bg-black bg-opacity-50 text-center text-white p-6 md:p-12">
