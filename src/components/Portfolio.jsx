@@ -40,16 +40,68 @@ export default function Portfolio() {
   return (
     <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
       <div className="bg-gradient-to-br from-orange-100 to-pink-200 dark:from-gray-900 dark:to-purple-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
-        <Header activeSection={activeSection} setActiveSection={setActiveSection} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-        <main className="container mx-auto px-4 py-20">
-          <AnimatePresence mode="wait">
-            {activeSection === 'home' && <Home key="home" darkMode={darkMode} />}
-            {activeSection === 'skills' && <Skills key="skills" darkMode={darkMode} />}
-            {activeSection === 'projects' && <Projects key="projects" projects={projects} darkMode={darkMode} />}
-            {activeSection === 'contact' && <Contact key="contact" darkMode={darkMode} />}
-          </AnimatePresence>
-        </main>
-        <Footer darkMode={darkMode} />
+        {/* Background pattern for light mode */}
+        <div className="absolute inset-0 opacity-20 dark:opacity-0 transition-opacity duration-500">
+          {[...Array(100)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full bg-orange-600"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                width: `${Math.random() * 3 + 3}px`,
+                height: `${Math.random() * 3 + 3}px`,
+              }}
+              animate={{
+                opacity: [0.2, 1, 0.2],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: Math.random() * 3 + 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Stars for dark mode */}
+        <div className="absolute inset-0 opacity-0 dark:opacity-100 transition-opacity duration-500 ">
+          {[...Array(100)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full bg-white"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                width: `${Math.random() * 2 + 2}px`,
+                height: `${Math.random() * 2 + 2}px`,
+              }}
+              animate={{
+                opacity: [0.2, 1, 0.2],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: Math.random() * 3 + 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+          {/* Main content wrapper */}
+          <div className="relative z-10">
+          <Header activeSection={activeSection} setActiveSection={setActiveSection} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+          <main className="container mx-auto px-4 py-20 min-h-screen">
+            <AnimatePresence mode="wait">
+              {activeSection === 'home' && <Home key="home" darkMode={darkMode} setActiveSection={setActiveSection} />}
+              {activeSection === 'skills' && <Skills key="skills" darkMode={darkMode} />}
+              {activeSection === 'projects' && <Projects key="projects" projects={projects} darkMode={darkMode} />}
+              {activeSection === 'contact' && <Contact key="contact" darkMode={darkMode} />}
+            </AnimatePresence>
+          </main>
+          <Footer darkMode={darkMode} />
+        </div>
       </div>
     </div>
   )
@@ -99,7 +151,7 @@ Header.propTypes = {
   toggleDarkMode: PropTypes.func.isRequired,
 }
 
-function Home() {
+function Home({ setActiveSection }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -141,7 +193,7 @@ function Home() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-full font-semibold"
-            onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => setActiveSection('contact')}
           >
             Hire Me
           </motion.button>
@@ -349,13 +401,13 @@ function Footer() {
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         <p>&copy; 2023 Adham. All rights reserved.</p>
         <div className="flex space-x-4 mt-4 md:mt-0">
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/adham-turki" target="_blank" rel="noopener noreferrer">
             <FaGithub className="text-2xl hover:text-orange-500 dark:hover:text-orange-400 transition duration-300" />
           </a>
-          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+          <a href="https://linkedin.com/in/adham-turki-54b723313" target="_blank" rel="noopener noreferrer">
             <FaLinkedin className="text-2xl hover:text-orange-500 dark:hover:text-orange-400 transition duration-300" />
           </a>
-          <a href="mailto:your.email@example.com">
+          <a href="https://www.facebook.com/profile.php?id=100009753456769">
             <FaEnvelope className="text-2xl hover:text-orange-500 dark:hover:text-orange-400 transition duration-300" />
           </a>
         </div>
