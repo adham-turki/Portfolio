@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaEnvelope, FaMoon, FaSun } from 'react-icons/fa'
 import { client, urlFor } from './client'
 import adham from '../assets/adham.jpg'
-
+import PropTypes from 'prop-types'
 const iconMap = {
   HTML: '🌐',
   CSS: '🎨',
@@ -92,8 +92,14 @@ function Header({ activeSection, setActiveSection, darkMode, toggleDarkMode }) {
     </header>
   )
 }
+Header.propTypes = {
+  activeSection: PropTypes.string.isRequired,
+  setActiveSection: PropTypes.func.isRequired,
+  darkMode: PropTypes.bool.isRequired,
+  toggleDarkMode: PropTypes.func.isRequired,
+}
 
-function Home({ darkMode }) {
+function Home() {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -143,6 +149,9 @@ function Home({ darkMode }) {
       </div>
     </motion.div>
   )
+}
+Home.propTypes = {
+  darkMode: PropTypes.bool.isRequired,
 }
 
 function Skills({ darkMode }) {
@@ -201,6 +210,9 @@ function Skills({ darkMode }) {
       ))}
     </motion.div>
   )
+}
+Skills.propTypes = {
+  darkMode: PropTypes.bool.isRequired,
 }
 
 function Projects({ projects, darkMode }) {
@@ -264,8 +276,12 @@ function Projects({ projects, darkMode }) {
     </motion.div>
   )
 }
+Projects.propTypes = {
+  projects: PropTypes.array.isRequired,
+  darkMode: PropTypes.bool.isRequired,
+}
 
-function Contact({ darkMode }) {
+function Contact() {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -327,7 +343,7 @@ function Contact({ darkMode }) {
   )
 }
 
-function Footer({ darkMode }) {
+function Footer() {
   return (
     <footer className="bg-gray-800 dark:bg-gray-900 text-white py-8 transition-colors duration-500">
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
