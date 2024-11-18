@@ -2,7 +2,7 @@
 
 import { useState, useEffect} from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaGithub, FaLinkedin, FaEnvelope, FaMoon, FaSun } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaEnvelope, FaMoon, FaSun,FaBars, FaTimes } from 'react-icons/fa'
 import { client, urlFor } from './client'
 import adham from '../assets/adham.jpg'
 import PropTypes from 'prop-types'
@@ -107,22 +107,31 @@ export default function Portfolio() {
   )
 }
 
-function Header({ activeSection, setActiveSection, darkMode, toggleDarkMode }) {
+ function Header({ activeSection, setActiveSection, darkMode, toggleDarkMode }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+
+  const menuItems = ['Home', 'Skills', 'Projects', 'Contact']
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-800 bg-opacity-80 dark:bg-opacity-80 backdrop-blur-md shadow-md transition-colors duration-500">
-      <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-2xl font-bold text-orange-600 dark:text-orange-400"
-        >
-          Adham
-        </motion.div>
-        <ul className="flex space-x-4">
-          {['Home', 'Skills', 'Projects', 'Contact'].map((item) => (
-            <motion.li key={item} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-              <button
+      <nav className="container mx-auto px-4 py-4">
+        <div className="flex justify-between items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-2xl font-bold text-orange-600 dark:text-orange-400"
+          >
+            Adham
+          </motion.div>
+          <div className="hidden md:flex space-x-4">
+            {menuItems.map((item) => (
+              <motion.button
+                key={item}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveSection(item.toLowerCase())}
                 className={`px-3 py-2 rounded-md ${
                   activeSection === item.toLowerCase()
@@ -131,15 +140,52 @@ function Header({ activeSection, setActiveSection, darkMode, toggleDarkMode }) {
                 }`}
               >
                 {item}
-              </button>
-            </motion.li>
-          ))}
-          <motion.li whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-            <button onClick={toggleDarkMode} className="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+              </motion.button>
+            ))}
+          </div>
+          <div className="flex items-center space-x-4">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={toggleDarkMode}
+              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
+            >
               {darkMode ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-gray-700" />}
+            </motion.button>
+            <button className="md:hidden" onClick={toggleMenu}>
+              {isMenuOpen ? <FaTimes className="text-2xl" /> : <FaBars className="text-2xl" />}
             </button>
-          </motion.li>
-        </ul>
+          </div>
+        </div>
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden mt-4"
+            >
+              {menuItems.map((item) => (
+                <motion.button
+                  key={item}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    setActiveSection(item.toLowerCase())
+                    setIsMenuOpen(false)
+                  }}
+                  className={`block w-full text-left px-3 py-2 rounded-md mb-2 ${
+                    activeSection === item.toLowerCase()
+                      ? 'bg-orange-500 text-white'
+                      : 'text-gray-600 dark:text-gray-300 hover:bg-orange-100 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  {item}
+                </motion.button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </header>
   )
