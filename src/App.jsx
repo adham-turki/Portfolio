@@ -1,41 +1,39 @@
 import './App.css';
-import Header from './components/Header';
-import adham from './assets/adham.jpg';
 import Portfolio from './components/Portfolio.jsx';
 import { useEffect } from 'react';
 
 function App() {
-  useEffect(() => {
-    const bubbleContainer = document.querySelector('.animated-bg');
+  // useEffect(() => {
+  //   const bubbleContainer = document.querySelector('.animated-bg');
 
-    for (let i = 0; i < 50; i++) {
-      const bubble = document.createElement('div');
-      bubble.classList.add('bubble');
+  //   for (let i = 0; i < 50; i++) {
+  //     const bubble = document.createElement('div');
+  //     bubble.classList.add('bubble');
 
-      // Randomize bubble size
-      const sizeClass = Math.random() > 0.5 ? 'bubble-large' : 'bubble-small';
-      bubble.classList.add(sizeClass);
+  //     // Randomize bubble size
+  //     const sizeClass = Math.random() > 0.5 ? 'bubble-large' : 'bubble-small';
+  //     bubble.classList.add(sizeClass);
 
-      // Randomize bubble horizontal and vertical starting positions
-      bubble.style.left = `${Math.random() * 100}%`;
-      bubble.style.setProperty('--random-start-y', Math.random());
+  //     // Randomize bubble horizontal and vertical starting positions
+  //     bubble.style.left = `${Math.random() * 100}%`;
+  //     bubble.style.setProperty('--random-start-y', Math.random());
 
-      // Randomize animation delay
-      bubble.style.animationDelay = `${Math.random() * 5}s`;
+  //     // Randomize animation delay
+  //     bubble.style.animationDelay = `${Math.random() * 5}s`;
 
-      bubbleContainer.appendChild(bubble);
-    }
-  }, []);
+  //     bubbleContainer.appendChild(bubble);
+  //   }
+  // }, []);
 
-  const handleViewCV = () => {
-    // Open the CV PDF in a new tab
-    window.open('https://drive.google.com/file/d/15249VthvSXgO65xtALJDHUL7uTE_zVzT/view?usp=sharing', '_blank');
-  };
+  // const handleViewCV = () => {
+  //   // Open the CV PDF in a new tab
+  //   window.open('https://drive.google.com/file/d/15249VthvSXgO65xtALJDHUL7uTE_zVzT/view?usp=sharing', '_blank');
+  // };
 
   
   return (
     <>
-      <div className="animated-bg"></div>
+      {/* <div className="animated-bg"></div>
       <div className="relative flex size-full min-h-screen flex-col layout-container overflow-x-hidden">
         <Header />
         <section id="about"></section>
@@ -71,7 +69,8 @@ function App() {
             <Portfolio />
           </div>
         </div>
-      </div>
+      </div> */}
+    <Portfolio />
     </>
   );
 }
