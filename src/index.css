@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 /* Add this to your App.css or a specific CSS file */
-.project-card {
-    min-height: 400px; /* or any height you prefer */
-  }
-
   html {
     scroll-behavior: smooth;
   }
