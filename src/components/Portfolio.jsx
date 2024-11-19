@@ -88,53 +88,54 @@ export default function Component() {
   return (
     <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
       <div className="bg-gradient-to-br from-orange-100 to-pink-200 dark:from-gray-900 dark:to-purple-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
-        {/* Background patterns and animations */}
-        <div className="absolute inset-0 opacity-20 dark:opacity-0 transition-opacity duration-500">
-          {[...Array(100)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full bg-orange-600"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                width: `${Math.random() * 3 + 3}px`,
-                height: `${Math.random() * 3 + 3}px`,
-              }}
-              animate={{
-                opacity: [0.2, 1, 0.2],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: Math.random() * 3 + 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-        </div>
+      <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute inset-0 opacity-20 dark:opacity-0 transition-opacity duration-500">
+            {[...Array(100)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute rounded-full bg-orange-600"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 3 + 3}px`,
+                  height: `${Math.random() * 3 + 3}px`,
+                }}
+                animate={{
+                  opacity: [0.2, 1, 0.2],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: Math.random() * 3 + 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
 
-        <div className="absolute inset-0 opacity-0 dark:opacity-100 transition-opacity duration-500">
-          {[...Array(100)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full bg-white"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                width: `${Math.random() * 2 + 2}px`,
-                height: `${Math.random() * 2 + 2}px`,
-              }}
-              animate={{
-                opacity: [0.2, 1, 0.2],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: Math.random() * 3 + 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
+          <div className="absolute inset-0 opacity-0 dark:opacity-100 transition-opacity duration-500">
+            {[...Array(100)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute rounded-full bg-white"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 2 + 2}px`,
+                  height: `${Math.random() * 2 + 2}px`,
+                }}
+                animate={{
+                  opacity: [0.2, 1, 0.2],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: Math.random() * 3 + 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Main content wrapper */}
@@ -212,7 +213,7 @@ export default function Component() {
           </header>
 
           {/* Main content */}
-          <main className="container mx-auto px-4 py-20">
+          <main className="container mx-auto px-4 py-10">
             {/* Home Section */}
             <motion.section
               ref={homeRef}
@@ -282,7 +283,7 @@ export default function Component() {
             <motion.section
               ref={skillsRef}
               id="skills"
-              className="py-20"
+              className="py-5"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
