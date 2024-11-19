@@ -88,7 +88,6 @@ export default function Component() {
   return (
     <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
       <div className="bg-gradient-to-br from-orange-100 to-pink-200 dark:from-gray-900 dark:to-purple-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
-      <div className="fixed inset-0 pointer-events-none">
           <div className="absolute inset-0 opacity-20 dark:opacity-0 transition-opacity duration-500">
             {[...Array(100)].map((_, i) => (
               <motion.div
@@ -136,7 +135,6 @@ export default function Component() {
               />
             ))}
           </div>
-        </div>
 
         {/* Main content wrapper */}
         <div className="relative z-10">
