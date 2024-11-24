@@ -278,7 +278,12 @@ export default function Component() {
             </motion.section>
 
             {/* Skills Section */}
-              
+            <motion.section
+              ref={skillsRef}
+              id="skills"
+              className="py-5"
+              viewport={{ once: true, amount: 0.3 }}
+            >
               <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
               <div
                
@@ -300,10 +305,6 @@ export default function Component() {
                 ].map((skill, index) => (
                   <div
                     key={skill.name}
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true, amount: 0.3 }}
                     className={`bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ${
                       darkMode ? 'hover:shadow-orange-400/50' : 'hover:shadow-orange-500/50'
                     }`}
@@ -329,6 +330,7 @@ export default function Component() {
                   </div>
                 ))}
               </div>
+            </motion.section>
 
              {/* Projects Section */}
              <motion.section
