@@ -278,20 +278,10 @@ export default function Component() {
             </motion.section>
 
             {/* Skills Section */}
-            <motion.section
-              ref={skillsRef}
-              id="skills"
-              className="py-5"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
+              
               <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
+              <div
+               
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               >
                 {[
@@ -308,7 +298,7 @@ export default function Component() {
                   { name: 'OOP', level: 'Advanced' },
                   { name: 'OOP Design', level: 'Advanced' },
                 ].map((skill, index) => (
-                  <motion.div
+                  <div
                     key={skill.name}
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -336,10 +326,9 @@ export default function Component() {
                         viewport={{ once: true, amount: 0.3 }}
                       ></motion.div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
-            </motion.section>
+              </div>
 
              {/* Projects Section */}
              <motion.section
