@@ -506,11 +506,11 @@ export default function Component() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
                   { name: "HTML", level: "Expert" },
-                  { name: "CSS", level: "Advanced" },
-                  { name: "React", level: "Advanced" },
-                  { name: "JavaScript", level: "Advanced" },
+                  { name: "CSS", level: "Expert" },
+                  { name: "React", level: "Expert" },
+                  { name: "JavaScript", level: "Expert" },
                   { name: "Java", level: "Advanced" },
-                  { name: "NodeJS", level: "Intermediate" },
+                  { name: "NodeJS", level: "Advanced" },
                   { name: "Python", level: "Advanced" },
                   { name: "MySQL", level: "Expert" },
                   { name: "Data Structures", level: "Expert" },
