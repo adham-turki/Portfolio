@@ -1,30 +1,279 @@
-'use client'
+"use client"
 
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FaGithub, FaLinkedin, FaEnvelope, FaMoon, FaSun, FaBars, FaTimes, FaPaperPlane,FaCommentAlt,FaUser, FaExternalLinkAlt, FaLaptopCode, FaFacebook, FaCog } from 'react-icons/fa'
-import { client, urlFor } from './client'
-import adham from '../assets/adham.jpg'
+import { useState, useEffect, useRef } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import {
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+  FaMoon,
+  FaSun,
+  FaBars,
+  FaTimes,
+  FaPaperPlane,
+  FaCommentAlt,
+  FaUser,
+  FaExternalLinkAlt,
+  FaLaptopCode,
+  FaFacebook,
+  FaCog,
+} from "react-icons/fa"
+import { client, urlFor } from "./client"
+import adham from "../assets/adham.jpg"
+
+// Animated Background Components
+function ElegantShape({
+  className = "",
+  delay = 0,
+  width = 400,
+  height = 100,
+  rotate = 0,
+  gradient = "from-white/[0.08]",
+  isDark = false,
+}) {
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: -150,
+        rotate: rotate - 15,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        rotate: rotate,
+      }}
+      transition={{
+        duration: 2.4,
+        delay,
+        ease: [0.23, 0.86, 0.39, 0.96],
+        opacity: { duration: 1.2 },
+      }}
+      className={`absolute ${className}`}
+    >
+      <motion.div
+        animate={{
+          y: [0, 15, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+        style={{
+          width,
+          height,
+        }}
+        className="relative"
+      >
+        <div
+          className={`absolute inset-0 rounded-full 
+            bg-gradient-to-r to-transparent 
+            ${gradient} 
+            backdrop-blur-[2px] border-2 
+            ${isDark ? "border-white/[0.15]" : "border-black/[0.05]"} 
+            ${isDark ? "shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]" : "shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]"} 
+            after:absolute after:inset-0 after:rounded-full 
+            ${
+              isDark
+                ? "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]"
+                : "after:bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.1),transparent_70%)]"
+            }`}
+        />
+      </motion.div>
+    </motion.div>
+  )
+}
+
+function AnimatedBackground({ darkMode }) {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Light mode shapes */}
+      {!darkMode && (
+        <>
+          <ElegantShape
+            delay={0.3}
+            width={600}
+            height={140}
+            rotate={12}
+            gradient="from-orange-500/[0.15]"
+            className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
+            isDark={false}
+          />
+
+          <ElegantShape
+            delay={0.5}
+            width={500}
+            height={120}
+            rotate={-15}
+            gradient="from-pink-500/[0.15]"
+            className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
+            isDark={false}
+          />
+
+          <ElegantShape
+            delay={0.4}
+            width={300}
+            height={80}
+            rotate={-8}
+            gradient="from-orange-300/[0.15]"
+            className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
+            isDark={false}
+          />
+
+          <ElegantShape
+            delay={0.6}
+            width={200}
+            height={60}
+            rotate={20}
+            gradient="from-pink-300/[0.15]"
+            className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
+            isDark={false}
+          />
+
+          <ElegantShape
+            delay={0.7}
+            width={150}
+            height={40}
+            rotate={-25}
+            gradient="from-orange-200/[0.15]"
+            className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
+            isDark={false}
+          />
+        </>
+      )}
+
+      {/* Dark mode shapes */}
+      {darkMode && (
+        <>
+          <ElegantShape
+            delay={0.3}
+            width={600}
+            height={140}
+            rotate={12}
+            gradient="from-indigo-500/[0.15]"
+            className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
+            isDark={true}
+          />
+
+          <ElegantShape
+            delay={0.5}
+            width={500}
+            height={120}
+            rotate={-15}
+            gradient="from-purple-500/[0.15]"
+            className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
+            isDark={true}
+          />
+
+          <ElegantShape
+            delay={0.4}
+            width={300}
+            height={80}
+            rotate={-8}
+            gradient="from-violet-500/[0.15]"
+            className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
+            isDark={true}
+          />
+
+          <ElegantShape
+            delay={0.6}
+            width={200}
+            height={60}
+            rotate={20}
+            gradient="from-blue-500/[0.15]"
+            className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
+            isDark={true}
+          />
+
+          <ElegantShape
+            delay={0.7}
+            width={150}
+            height={40}
+            rotate={-25}
+            gradient="from-cyan-500/[0.15]"
+            className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]"
+            isDark={true}
+          />
+        </>
+      )}
+
+      {/* Stars for dark mode */}
+      {darkMode && (
+        <div className="absolute inset-0">
+          {[...Array(100)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full bg-white"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                width: `${Math.random() * 2 + 2}px`,
+                height: `${Math.random() * 2 + 2}px`,
+              }}
+              animate={{
+                opacity: [0.2, 1, 0.2],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: Math.random() * 3 + 2,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Particles for light mode */}
+      {!darkMode && (
+        <div className="absolute inset-0">
+          {[...Array(100)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full bg-orange-600"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                width: `${Math.random() * 3 + 3}px`,
+                height: `${Math.random() * 3 + 3}px`,
+              }}
+              animate={{
+                opacity: [0.2, 1, 0.2],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: Math.random() * 3 + 2,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 const iconMap = {
-  HTML: '🌐',
-  CSS: '🎨',
-  React: '⚛️',
-  JavaScript: '🟨',
-  Java: '☕',
-  NodeJS: '🟩',
-  Python: '🐍',
-  MySQL: '🗄️',
-  JavaFX: '🖥️',
-  Redux: '🔄',
-  'Data Structures': '🏗️',
-  Algorithms: '🧮',
-  OOP: '🧱',
-  'OOP Design': '📐',
+  HTML: "🌐",
+  CSS: "🎨",
+  React: "⚛️",
+  JavaScript: "🟨",
+  Java: "☕",
+  NodeJS: "🟩",
+  Python: "🐍",
+  MySQL: "🗄️",
+  JavaFX: "🖥️",
+  Redux: "🔄",
+  "Data Structures": "🏗️",
+  Algorithms: "🧮",
+  OOP: "🧱",
+  "OOP Design": "📐",
 }
 
 export default function Component() {
-  const [activeSection, setActiveSection] = useState('home')
+  const [activeSection, setActiveSection] = useState("home")
   const [projects, setProjects] = useState([])
   const [darkMode, setDarkMode] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -33,7 +282,6 @@ export default function Component() {
   const skillsRef = useRef(null)
   const projectsRef = useRef(null)
   const contactRef = useRef(null)
-
 
   useEffect(() => {
     client.fetch('*[_type == "project"]').then((data) => setProjects(data))
@@ -44,10 +292,10 @@ export default function Component() {
       const scrollPosition = window.scrollY + 100 // Offset for better accuracy
 
       const sections = [
-        { id: 'home', ref: homeRef },
-        { id: 'skills', ref: skillsRef },
-        { id: 'projects', ref: projectsRef },
-        { id: 'contact', ref: contactRef },
+        { id: "home", ref: homeRef },
+        { id: "skills", ref: skillsRef },
+        { id: "projects", ref: projectsRef },
+        { id: "contact", ref: contactRef },
       ]
 
       for (const section of sections) {
@@ -57,18 +305,18 @@ export default function Component() {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
-    document.documentElement.classList.toggle('light')
+    document.documentElement.classList.toggle("light")
   }
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
-  const menuItems = ['Home', 'Skills', 'Projects', 'Contact']
+  const menuItems = ["Home", "Skills", "Projects", "Contact"]
 
   const scrollToSection = (sectionId) => {
     const sectionRef = {
@@ -79,62 +327,28 @@ export default function Component() {
     }[sectionId]
 
     if (sectionRef && sectionRef.current) {
-      sectionRef.current.scrollIntoView({ behavior: 'smooth' })
+      sectionRef.current.scrollIntoView({ behavior: "smooth" })
     }
     setActiveSection(sectionId)
     setIsMenuOpen(false)
   }
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
-      <div className="bg-gradient-to-br from-orange-100 to-pink-200 dark:from-gray-900 dark:to-purple-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
-          <div className="absolute inset-0 opacity-20 dark:opacity-0 transition-opacity duration-500">
-            {[...Array(100)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute rounded-full bg-orange-600"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  width: `${Math.random() * 3 + 3}px`,
-                  height: `${Math.random() * 3 + 3}px`,
-                }}
-                animate={{
-                  opacity: [0.2, 1, 0.2],
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: Math.random() * 3 + 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
-          </div>
+    <div className={`min-h-screen ${darkMode ? "dark" : ""}`}>
+      <div
+        className={`relative ${darkMode ? "bg-gray-900" : "bg-orange-50"} text-gray-800 dark:text-gray-200 transition-colors duration-500`}
+      >
+        {/* Animated Background */}
+        <AnimatedBackground darkMode={darkMode} />
 
-          <div className="absolute inset-0 opacity-0 dark:opacity-100 transition-opacity duration-500">
-            {[...Array(100)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute rounded-full bg-white"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  width: `${Math.random() * 2 + 2}px`,
-                  height: `${Math.random() * 2 + 2}px`,
-                }}
-                animate={{
-                  opacity: [0.2, 1, 0.2],
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: Math.random() * 3 + 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
-          </div>
+        {/* Gradient Overlays */}
+        <div
+          className={`absolute inset-0 ${
+            darkMode
+              ? "bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-purple-500/[0.05]"
+              : "bg-gradient-to-br from-orange-500/[0.05] via-transparent to-pink-500/[0.05]"
+          } blur-3xl`}
+        />
 
         {/* Main content wrapper */}
         <div className="relative z-10">
@@ -159,8 +373,8 @@ export default function Component() {
                       onClick={() => scrollToSection(item.toLowerCase())}
                       className={`px-3 py-2 rounded-md ${
                         activeSection === item.toLowerCase()
-                          ? 'bg-orange-500 text-white'
-                          : 'text-gray-600 dark:text-gray-300 hover:bg-orange-100 dark:hover:bg-gray-700'
+                          ? "bg-orange-500 text-white"
+                          : "text-gray-600 dark:text-gray-300 hover:bg-orange-100 dark:hover:bg-gray-700"
                       }`}
                     >
                       {item}
@@ -185,7 +399,7 @@ export default function Component() {
                 {isMenuOpen && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
+                    animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
                     className="md:hidden mt-4"
@@ -197,8 +411,8 @@ export default function Component() {
                         onClick={() => scrollToSection(item.toLowerCase())}
                         className={`block w-full text-left px-3 py-2 rounded-md mb-2 ${
                           activeSection === item.toLowerCase()
-                            ? 'bg-orange-500 text-white'
-                            : 'text-gray-600 dark:text-gray-300 hover:bg-orange-100 dark:hover:bg-gray-700'
+                            ? "bg-orange-500 text-white"
+                            : "text-gray-600 dark:text-gray-300 hover:bg-orange-100 dark:hover:bg-gray-700"
                         }`}
                       >
                         {item}
@@ -211,7 +425,7 @@ export default function Component() {
           </header>
 
           {/* Main content */}
-          <main className="container mx-auto px-4 py-10">
+          <main className="container mx-auto px-4 py-10 mb-20">
             {/* Home Section */}
             <motion.section
               ref={homeRef}
@@ -227,8 +441,8 @@ export default function Component() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="mb-8 md:mb-0 md:mr-12"
               >
-                 <img
-                  src={adham}
+                <img
+                  src={adham || "/placeholder.svg"}
                   alt="Adham"
                   className="rounded-full w-64 h-64 object-cover border-4 border-orange-500 dark:border-orange-400 shadow-lg"
                 />
@@ -248,8 +462,8 @@ export default function Component() {
                   transition={{ duration: 0.5, delay: 0.4 }}
                   className="text-xl mb-8 max-w-2xl"
                 >
-                  I craft seamless, user-friendly interfaces that enhance digital experiences. My passion lies in building
-                  intuitive, responsive web applications that solve real-world problems and delight users.
+                  I craft seamless, user-friendly interfaces that enhance digital experiences. My passion lies in
+                  building intuitive, responsive web applications that solve real-world problems and delight users.
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -261,7 +475,12 @@ export default function Component() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="bg-orange-500 dark:bg-orange-400 text-white px-6 py-3 rounded-full font-semibold"
-                    onClick={() => window.open('https://drive.google.com/file/d/15249VthvSXgO65xtALJDHUL7uTE_zVzT/view?usp=sharing', '_blank')}
+                    onClick={() =>
+                      window.open(
+                        "https://drive.google.com/file/d/15249VthvSXgO65xtALJDHUL7uTE_zVzT/view?usp=sharing",
+                        "_blank",
+                      )
+                    }
                   >
                     View CV
                   </motion.button>
@@ -269,7 +488,7 @@ export default function Component() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-full font-semibold"
-                    onClick={() => scrollToSection('contact')}
+                    onClick={() => scrollToSection("contact")}
                   >
                     Hire Me
                   </motion.button>
@@ -278,35 +497,27 @@ export default function Component() {
             </motion.section>
 
             {/* Skills Section */}
-            <motion.section
-              ref={skillsRef}
-              id="skills"
-              className="py-5"
-              viewport={{ once: true, amount: 0.3 }}
-            >
+            <motion.section ref={skillsRef} id="skills" className="py-5" viewport={{ once: true, amount: 0.3 }}>
               <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
-              <div
-               
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-              >
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
-                  { name: 'HTML', level: 'Expert' },
-                  { name: 'CSS', level: 'Advanced' },
-                  { name: 'React', level: 'Advanced' },
-                  { name: 'JavaScript', level: 'Advanced' },
-                  { name: 'Java', level: 'Advanced' },
-                  { name: 'NodeJS', level: 'Intermediate' },
-                  { name: 'Python', level: 'Advanced' },
-                  { name: 'MySQL', level: 'Expert' },
-                  { name: 'Data Structures', level: 'Expert' },
-                  { name: 'Algorithms', level: 'Advanced' },
-                  { name: 'OOP', level: 'Advanced' },
-                  { name: 'OOP Design', level: 'Advanced' },
+                  { name: "HTML", level: "Expert" },
+                  { name: "CSS", level: "Advanced" },
+                  { name: "React", level: "Advanced" },
+                  { name: "JavaScript", level: "Advanced" },
+                  { name: "Java", level: "Advanced" },
+                  { name: "NodeJS", level: "Intermediate" },
+                  { name: "Python", level: "Advanced" },
+                  { name: "MySQL", level: "Expert" },
+                  { name: "Data Structures", level: "Expert" },
+                  { name: "Algorithms", level: "Advanced" },
+                  { name: "OOP", level: "Advanced" },
+                  { name: "OOP Design", level: "Advanced" },
                 ].map((skill, index) => (
                   <div
                     key={skill.name}
                     className={`bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ${
-                      darkMode ? 'hover:shadow-orange-400/50' : 'hover:shadow-orange-500/50'
+                      darkMode ? "hover:shadow-orange-400/50" : "hover:shadow-orange-500/50"
                     }`}
                   >
                     <div className="text-4xl mb-2">{iconMap[skill.name]}</div>
@@ -315,14 +526,16 @@ export default function Component() {
                     <div className="mt-4 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                       <motion.div
                         className={`h-full ${
-                          skill.level === 'Expert'
-                            ? 'bg-green-500'
-                            : skill.level === 'Advanced'
-                            ? 'bg-blue-500'
-                            : 'bg-yellow-500'
+                          skill.level === "Expert"
+                            ? "bg-green-500"
+                            : skill.level === "Advanced"
+                              ? "bg-blue-500"
+                              : "bg-yellow-500"
                         }`}
                         initial={{ width: 0 }}
-                        whileInView={{ width: skill.level === 'Expert' ? '100%' : skill.level === 'Advanced' ? '75%' : '50%' }}
+                        whileInView={{
+                          width: skill.level === "Expert" ? "100%" : skill.level === "Advanced" ? "75%" : "50%",
+                        }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                         viewport={{ once: true, amount: 0.3 }}
                       ></motion.div>
@@ -332,8 +545,8 @@ export default function Component() {
               </div>
             </motion.section>
 
-             {/* Projects Section */}
-             <motion.section
+            {/* Projects Section */}
+            <motion.section
               ref={projectsRef}
               id="projects"
               className="py-20"
@@ -357,11 +570,11 @@ export default function Component() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true, amount: 0.3 }}
                     className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 ${
-                      darkMode ? 'hover:shadow-orange-400/50' : 'hover:shadow-orange-500/50'
+                      darkMode ? "hover:shadow-orange-400/50" : "hover:shadow-orange-500/50"
                     }`}
                   >
                     <img
-                      src={project.image ? urlFor(project.image.asset).url() : '/placeholder.jpg'}
+                      src={project.image ? urlFor(project.image.asset).url() : "/placeholder.jpg"}
                       alt={project.title}
                       width={400}
                       height={200}
@@ -457,7 +670,10 @@ export default function Component() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                    >
                       <FaCommentAlt className="inline mr-2" />
                       Message
                     </label>
@@ -469,7 +685,7 @@ export default function Component() {
                       required
                     ></textarea>
                   </div>
-                <motion.button
+                  <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     type="submit"
@@ -483,8 +699,8 @@ export default function Component() {
             </motion.section>
           </main>
 
-           {/* Footer */}
-           <footer className="bg-gray-800 dark:bg-gray-900 text-white py-8 transition-colors duration-500">
+          {/* Footer */}
+          <footer className="bg-gray-800 dark:bg-gray-900 text-white py-8 transition-colors duration-500">
             <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
               <p>&copy; 2023 Adham. All rights reserved.</p>
               <div className="flex space-x-4 mt-4 md:mt-0">
@@ -505,3 +721,4 @@ export default function Component() {
     </div>
   )
 }
+
