@@ -18,8 +18,7 @@ import {
   FaFacebook,
   FaCog,
 } from "react-icons/fa"
-import { client, urlFor } from "./client"
-import adham from "../assets/adham.jpg"
+import { CertificationsSection } from "./certifications-section"
 
 // Animated Background Components
 function ElegantShape({
@@ -281,10 +280,13 @@ export default function Component() {
   const homeRef = useRef(null)
   const skillsRef = useRef(null)
   const projectsRef = useRef(null)
+  const certificationsRef = useRef(null)
   const contactRef = useRef(null)
 
   useEffect(() => {
-    client.fetch('*[_type == "project"]').then((data) => setProjects(data))
+    // Simulating client fetch
+    // client.fetch('*[_type == "project"]').then((data) => setProjects(data))
+    setProjects([])
   }, [])
 
   useEffect(() => {
@@ -295,6 +297,7 @@ export default function Component() {
         { id: "home", ref: homeRef },
         { id: "skills", ref: skillsRef },
         { id: "projects", ref: projectsRef },
+        { id: "certifications", ref: certificationsRef },
         { id: "contact", ref: contactRef },
       ]
 
@@ -316,13 +319,14 @@ export default function Component() {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
-  const menuItems = ["Home", "Skills", "Projects", "Contact"]
+  const menuItems = ["Home", "Skills", "Projects", "Certifications", "Contact"]
 
   const scrollToSection = (sectionId) => {
     const sectionRef = {
       home: homeRef,
       skills: skillsRef,
       projects: projectsRef,
+      certifications: certificationsRef,
       contact: contactRef,
     }[sectionId]
 
@@ -442,7 +446,7 @@ export default function Component() {
                 className="mb-8 md:mb-0 md:mr-12"
               >
                 <img
-                  src={adham || "/placeholder.svg"}
+                  src="/placeholder.svg?height=256&width=256"
                   alt="Adham"
                   className="rounded-full w-64 h-64 object-cover border-4 border-orange-500 dark:border-orange-400 shadow-lg"
                 />
@@ -497,16 +501,16 @@ export default function Component() {
             </motion.section>
 
             {/* Skills Section */}
-            <motion.section ref={skillsRef} id="skills" className="py-5" viewport={{ once: true, amount: 0.3 }}>
+            <motion.section ref={skillsRef} id="skills" className="py-20" viewport={{ once: true, amount: 0.3 }}>
               <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
                   { name: "HTML", level: "Expert" },
-                  { name: "CSS", level: "Advanced" },
-                  { name: "React", level: "Advanced" },
-                  { name: "JavaScript", level: "Advanced" },
+                  { name: "CSS", level: "Expert" },
+                  { name: "React", level: "Expert" },
+                  { name: "JavaScript", level: "Expert" },
                   { name: "Java", level: "Advanced" },
-                  { name: "NodeJS", level: "Intermediate" },
+                  { name: "NodeJS", level: "Advanced" },
                   { name: "Python", level: "Advanced" },
                   { name: "MySQL", level: "Expert" },
                   { name: "Data Structures", level: "Expert" },
@@ -574,7 +578,7 @@ export default function Component() {
                     }`}
                   >
                     <img
-                      src={project.image ? urlFor(project.image.asset).url() : "/placeholder.jpg"}
+                      src={project.image ? project.image : "/placeholder.svg?height=200&width=400"}
                       alt={project.title}
                       width={400}
                       height={200}
@@ -587,15 +591,16 @@ export default function Component() {
                       </h3>
                       <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
                       <div className="flex flex-wrap gap-2 mb-4">
-                        {project.techStack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-100 text-xs px-2 py-1 rounded-full flex items-center"
-                          >
-                            <FaCog className="mr-1" />
-                            {tech}
-                          </span>
-                        ))}
+                        {project.techStack &&
+                          project.techStack.map((tech) => (
+                            <span
+                              key={tech}
+                              className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-100 text-xs px-2 py-1 rounded-full flex items-center"
+                            >
+                              <FaCog className="mr-1" />
+                              {tech}
+                            </span>
+                          ))}
                       </div>
                       <div className="flex justify-between">
                         <a
@@ -621,6 +626,19 @@ export default function Component() {
                   </motion.div>
                 ))}
               </motion.div>
+            </motion.section>
+
+            {/* Certifications Section */}
+            <motion.section
+              ref={certificationsRef}
+              id="certifications"
+              className="py-20"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <CertificationsSection />
             </motion.section>
 
             {/* Contact Section */}
