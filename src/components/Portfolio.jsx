@@ -295,7 +295,7 @@ export default function Component() {
 
       const sections = [
         { id: "home", ref: homeRef },
-        { id: "skills", ref: skillsRef },
+        { id: "techstack", ref: skillsRef },
         { id: "projects", ref: projectsRef },
         { id: "certifications", ref: certificationsRef },
         { id: "contact", ref: contactRef },
@@ -319,12 +319,12 @@ export default function Component() {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
-  const menuItems = ["Home", "Skills", "Projects", "certifications", "Contact"]
+  const menuItems = ["Home", "Techstack", "Projects", "certifications", "Contact"]
 
   const scrollToSection = (sectionId) => {
     const sectionRef = {
       home: homeRef,
-      skills: skillsRef,
+      techstack: skillsRef,
       projects: projectsRef,
       contact: contactRef,
       certifications: certificationsRef,
@@ -374,9 +374,9 @@ export default function Component() {
                       key={item}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
-                      onClick={() => scrollToSection(item.toLowerCase())}
+                      onClick={() => scrollToSection(item.toLowerCase().replace(" ", ""))}
                       className={`px-3 py-2 rounded-md ${
-                        activeSection === item.toLowerCase()
+                        activeSection === item.toLowerCase().replace(" ", "")
                           ? "bg-orange-500 text-white"
                           : "text-gray-600 dark:text-gray-300 hover:bg-orange-100 dark:hover:bg-gray-700"
                       }`}
@@ -412,9 +412,9 @@ export default function Component() {
                       <motion.button
                         key={item}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => scrollToSection(item.toLowerCase())}
+                        onClick={() => scrollToSection(item.toLowerCase().replace(" ", ""))}
                         className={`block w-full text-left px-3 py-2 rounded-md mb-2 ${
-                          activeSection === item.toLowerCase()
+                          activeSection === item.toLowerCase().replace(" ", "")
                             ? "bg-orange-500 text-white"
                             : "text-gray-600 dark:text-gray-300 hover:bg-orange-100 dark:hover:bg-gray-700"
                         }`}
@@ -500,52 +500,137 @@ export default function Component() {
               </div>
             </motion.section>
 
-            {/* Skills Section */}
+            {/* Tech Stack Section */}
             <motion.section ref={skillsRef} id="skills" className="py-5" viewport={{ once: true, amount: 0.3 }}>
-              <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                  { name: "HTML", level: "Expert" },
-                  { name: "CSS", level: "Expert" },
-                  { name: "React", level: "Expert" },
-                  { name: "JavaScript", level: "Expert" },
-                  { name: "Java", level: "Advanced" },
-                  { name: "NodeJS", level: "Advanced" },
-                  { name: "Python", level: "Advanced" },
-                  { name: "MySQL", level: "Expert" },
-                  { name: "Data Structures", level: "Expert" },
-                  { name: "Algorithms", level: "Advanced" },
-                  { name: "OOP", level: "Advanced" },
-                  { name: "OOP Design", level: "Advanced" },
-                ].map((skill, index) => (
-                  <div
-                    key={skill.name}
-                    className={`bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ${
-                      darkMode ? "hover:shadow-orange-400/50" : "hover:shadow-orange-500/50"
-                    }`}
-                  >
-                    <div className="text-4xl mb-2">{iconMap[skill.name]}</div>
-                    <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
-                    <p className="text-gray-600 dark:text-gray-400">{skill.level}</p>
-                    <div className="mt-4 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                      <motion.div
-                        className={`h-full ${
-                          skill.level === "Expert"
-                            ? "bg-green-500"
-                            : skill.level === "Advanced"
-                              ? "bg-blue-500"
-                              : "bg-yellow-500"
-                        }`}
-                        initial={{ width: 0 }}
-                        whileInView={{
-                          width: skill.level === "Expert" ? "100%" : skill.level === "Advanced" ? "75%" : "50%",
-                        }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                      ></motion.div>
+              <h2 className="text-3xl font-bold mb-8 text-center">Tech Stack</h2>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Frontend */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="bg-white/90 dark:bg-gray-800/90 rounded-lg shadow-lg overflow-hidden"
+                >
+                  <div className="bg-gradient-to-r from-orange-500 to-pink-500 h-2"></div>
+                  <div className="p-6">
+                    <div className="flex items-center mb-6">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white text-2xl mr-4 shadow-lg">
+                        🎨
+                      </div>
+                      <h3 className="text-xl font-bold">Frontend</h3>
+                    </div>
+
+                    <div className="flex flex-wrap gap-3">
+                      {[
+                        { name: "HTML", icon: "🌐" },
+                        { name: "CSS", icon: "🎨" },
+                        { name: "JavaScript", icon: "🟨" },
+                        { name: "React", icon: "⚛️" },
+                        { name: "Next.js", icon: "▲" },
+                        { name: "Redux", icon: "🔄" },
+                        { name: "Redux Saga", icon: "🧬" },
+                      ].map((skill) => (
+                        <motion.div
+                          key={skill.name}
+                          whileHover={{ scale: 1.05 }}
+                          className="flex items-center bg-orange-100 dark:bg-orange-900/40 text-orange-800 dark:text-orange-100 px-3 py-2 rounded-lg shadow-sm"
+                        >
+                          <span className="mr-2">{skill.icon}</span>
+                          {skill.name}
+                        </motion.div>
+                      ))}
                     </div>
                   </div>
-                ))}
+                </motion.div>
+
+                {/* Backend */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="bg-white/90 dark:bg-gray-800/90 rounded-lg shadow-lg overflow-hidden"
+                >
+                  <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-2"></div>
+                  <div className="p-6">
+                    <div className="flex items-center mb-6">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white text-2xl mr-4 shadow-lg">
+                        ⚙️
+                      </div>
+                      <h3 className="text-xl font-bold">Backend</h3>
+                    </div>
+
+                    <div className="flex flex-wrap gap-3">
+                      {[
+                        { name: "NodeJS", icon: "🟩" },
+                        { name: "Java", icon: "☕" },
+                        { name: "Python", icon: "🐍" },
+                        { name: "PHP", icon: "🐘" },
+                        { name: "MySQL", icon: "🗄️" },
+                        { name: "MongoDB", icon: "🍃" },
+                        { name: "Strapi", icon: "🚀" },
+                        { name: "Rules Engine", icon: "📏" },
+                      ].map((skill) => (
+                        <motion.div
+                          key={skill.name}
+                          whileHover={{ scale: 1.05 }}
+                          className="flex items-center bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-100 px-3 py-2 rounded-lg shadow-sm"
+                        >
+                          <span className="mr-2">{skill.icon}</span>
+                          {skill.name}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Tools & Others */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  viewport={{ once: true }}
+                  className="bg-white/90 dark:bg-gray-800/90 rounded-lg shadow-lg overflow-hidden"
+                >
+                  <div className="bg-gradient-to-r from-green-500 to-teal-500 h-2"></div>
+                  <div className="p-6">
+                    <div className="flex items-center mb-6">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center text-white text-2xl mr-4 shadow-lg">
+                        🛠️
+                      </div>
+                      <h3 className="text-xl font-bold">Tools & Others</h3>
+                    </div>
+
+                    <div className="flex flex-wrap gap-3">
+                      {[
+                        { name: "VS Code", icon: "💻" },
+                        { name: "IntelliJ", icon: "🧠" },
+                        { name: "Android Studio", icon: "📱" },
+                        { name: "Eclipse", icon: "🌓" },
+                        { name: "Postman", icon: "📮" },
+                        { name: "SoapUI", icon: "🧼" },
+                        { name: "Thunder Client", icon: "⚡" },
+                        { name: "Jupiter", icon: "🪐" },
+                        { name: "Swagger UI", icon: "📝" },
+                        { name: "PyCharm", icon: "🐍" },
+                        { name: "Android", icon: "🤖" },
+                        { name: "Data Structures", icon: "🏗️" },
+                        { name: "Algorithms", icon: "🧮" },
+                      ].map((skill) => (
+                        <motion.div
+                          key={skill.name}
+                          whileHover={{ scale: 1.05 }}
+                          className="flex items-center bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-100 px-3 py-2 rounded-lg shadow-sm"
+                        >
+                          <span className="mr-2">{skill.icon}</span>
+                          {skill.name}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
               </div>
             </motion.section>
 
@@ -626,8 +711,8 @@ export default function Component() {
                 ))}
               </motion.div>
             </motion.section>
-             {/* Certifications Section */}
-             <motion.section
+            {/* Certifications Section */}
+            <motion.section
               ref={certificationsRef}
               id="certifications"
               className="py-20"
@@ -737,4 +822,3 @@ export default function Component() {
     </div>
   )
 }
-
