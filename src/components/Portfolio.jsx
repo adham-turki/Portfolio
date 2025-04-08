@@ -297,8 +297,8 @@ export default function Component() {
         { id: "home", ref: homeRef },
         { id: "skills", ref: skillsRef },
         { id: "projects", ref: projectsRef },
-        { id: "contact", ref: contactRef },
         { id: "certifications", ref: certificationsRef },
+        { id: "contact", ref: contactRef },
       ]
 
       for (const section of sections) {
