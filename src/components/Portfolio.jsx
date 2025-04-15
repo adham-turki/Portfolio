@@ -481,7 +481,7 @@ export default function Component() {
                     className="bg-orange-500 dark:bg-orange-400 text-white px-6 py-3 rounded-full font-semibold"
                     onClick={() =>
                       window.open(
-                        "https://drive.google.com/file/d/15249VthvSXgO65xtALJDHUL7uTE_zVzT/view?usp=sharing",
+                        "https://drive.google.com/file/d/1-HYa-iwjiH0Mx6pNzg-w4EYCXAI2vbMP/view?usp=sharing",
                         "_blank",
                       )
                     }
