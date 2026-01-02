@@ -1,28 +1,13 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { FaAward, FaCode, FaTerminal, FaDatabase, FaServer, FaFileCode, FaLaptopCode, FaTimes } from "react-icons/fa"
 
-interface Certification {
-  id: string
-  title: string
-  icon: React.ReactNode
-  imageSrc: string
-  color: string
-  description: string
-  date: string
-  instructor: string
-  duration: string
-}
-
 export function CertificationsSection() {
-  const [selectedCert, setSelectedCert] = useState<Certification | null>(null)
-  const [darkMode, setDarkMode] = useState(true)
+  const [selectedCert, setSelectedCert] = useState(null)
 
-  const certifications: Certification[] = [
+  const certifications = [
     {
       id: "js-foundations",
       title: "Deep JavaScript Foundations, v3",
@@ -113,7 +98,7 @@ export function CertificationsSection() {
     },
   ]
 
-  const openCertificate = (cert: Certification) => {
+  const openCertificate = (cert) => {
     setSelectedCert(cert)
     // Prevent body scrolling when dialog is open
     document.body.style.overflow = "hidden"
@@ -142,11 +127,11 @@ export function CertificationsSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-pink-500 dark:from-orange-400 dark:to-pink-400">
-            <FaAward className="inline-block mr-2 text-orange-500 dark:text-orange-400" />
+          <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+            <FaAward className="inline-block mr-2 text-primary" />
             Certifications
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-muted-foreground">
             Professional certifications from Frontend Masters, showcasing my commitment to continuous learning and skill
             development.
           </p>
@@ -162,24 +147,22 @@ export function CertificationsSection() {
               viewport={{ once: true, amount: 0.3 }}
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2)",
               }}
               onClick={() => openCertificate(cert)}
-              className={`bg-white dark:bg-gray-800 rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 flex flex-col ${
-                darkMode ? "hover:shadow-orange-400/50" : "hover:shadow-orange-500/50"
-              }`}
+              className="bg-card/30 backdrop-blur-sm border border-primary/20 rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 flex flex-col hover:border-primary/50"
             >
               <div className={`h-3 bg-gradient-to-r ${cert.color}`} />
               <div className="p-6 flex-1 flex flex-col">
                 <div className="mb-4 flex items-center justify-between">
-                  <div className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700">{cert.icon}</div>
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-orange-100 dark:bg-orange-900 text-orange-600 dark:text-orange-300">
+                  <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">{cert.icon}</div>
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 border border-primary/30 text-primary">
                     <FaAward className="w-4 h-4" />
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{cert.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">{cert.description}</p>
-                <div className="flex items-center text-sm text-orange-500 dark:text-orange-400">
+                <h3 className="text-lg font-semibold mb-2 text-foreground">{cert.title}</h3>
+                <p className="text-sm text-muted-foreground mb-4 flex-1">{cert.description}</p>
+                <div className="flex items-center text-sm text-primary">
                   <span>View Certificate</span>
                   <svg
                     className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
@@ -200,42 +183,46 @@ export function CertificationsSection() {
       {/* Certificate Dialog */}
       <AnimatePresence>
         {selectedCert && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-75">
+          <div 
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
+            onClick={closeCertificate}
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
-              className="relative w-full max-w-4xl"
+              className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={closeCertificate}
-                className="absolute -top-12 right-0 text-white p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors z-10"
+                className="absolute -top-12 right-0 text-foreground p-2 rounded-full bg-card/80 backdrop-blur-sm border border-primary/30 hover:bg-card transition-colors z-10"
               >
                 <FaTimes className="text-xl" />
               </button>
 
               <motion.div
-                className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-2xl"
+                className="bg-card/90 backdrop-blur-sm border border-primary/20 rounded-xl overflow-hidden shadow-2xl"
                 layoutId={`cert-${selectedCert.id}`}
               >
                 <div className="relative">
                   <img
                     src={selectedCert.imageSrc || "/placeholder.svg"}
                     alt={selectedCert.title}
-                    className="w-full object-cover"
+                    className="w-full h-auto object-cover max-h-[60vh]"
                   />
                 </div>
 
                 <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
+                  <div className="flex flex-col md:flex-row justify-between items-start mb-4 gap-4">
                     <div>
-                      <h3 className="text-xl font-bold text-gray-800 dark:text-white">{selectedCert.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-300">Instructor: {selectedCert.instructor}</p>
+                      <h3 className="text-xl font-bold text-foreground mb-2">{selectedCert.title}</h3>
+                      <p className="text-muted-foreground">Instructor: {selectedCert.instructor}</p>
                     </div>
-                    <div className="flex flex-col items-end">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Completed: {selectedCert.date}</span>
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                    <div className="flex flex-col items-start md:items-end">
+                      <span className="text-sm text-muted-foreground">Completed: {selectedCert.date}</span>
+                      <span className="text-sm text-muted-foreground">
                         Duration: {selectedCert.duration}
                       </span>
                     </div>
@@ -245,7 +232,7 @@ export function CertificationsSection() {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="bg-orange-500 dark:bg-orange-400 text-white px-4 py-2 rounded-md font-medium"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 rounded-md font-medium transition-colors"
                       onClick={closeCertificate}
                     >
                       Close
@@ -260,4 +247,3 @@ export function CertificationsSection() {
     </>
   )
 }
-
