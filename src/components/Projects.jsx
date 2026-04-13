@@ -7,20 +7,20 @@ import { client, urlFor } from "./client";
 // Legendary letter-by-letter animation
 const AnimatedTitle = ({ text, className, delay = 0, isInView }) => {
   const words = text.split(" ");
-  
+
   return (
-    <motion.span className={`inline-flex flex-wrap justify-center ${className}`}>
+    <motion.span className={`inline-flex flex-wrap justify-center ${className}`} style={{ minHeight: '1.2em' }}>
       {words.map((word, wordIndex) => (
         <span key={wordIndex} className="inline-flex mr-[0.25em]">
           {word.split("").map((letter, letterIndex) => (
             <motion.span
               key={letterIndex}
               className="inline-block"
-              initial={{ 
-                opacity: 0, 
-                y: 100,
+              initial={{
+                opacity: 0,
+                y: 30,
                 rotateX: -90,
-                scale: 0.5,
+                scale: 0.8,
               }}
               animate={isInView ? {
                 opacity: 1,
@@ -106,15 +106,14 @@ const Projects = () => {
       {[...Array(18)].map((_, i) => (
         <motion.div
           key={i}
-          className={`absolute rounded-full ${
-            i % 4 === 0 
-              ? "w-2 h-2 bg-primary/35" 
-              : i % 4 === 1 
-                ? "w-1 h-1 bg-secondary/45" 
-                : i % 4 === 2
-                  ? "w-3 h-3 bg-primary/20"
-                  : "w-1.5 h-1.5 bg-secondary/35"
-          }`}
+          className={`absolute rounded-full ${i % 4 === 0
+            ? "w-2 h-2 bg-primary/35"
+            : i % 4 === 1
+              ? "w-1 h-1 bg-secondary/45"
+              : i % 4 === 2
+                ? "w-3 h-3 bg-primary/20"
+                : "w-1.5 h-1.5 bg-secondary/35"
+            }`}
           style={{
             left: `${5 + Math.random() * 90}%`,
             top: `${5 + Math.random() * 90}%`,
@@ -215,7 +214,7 @@ const Projects = () => {
           </motion.div>
 
           {/* Legendary animated title */}
-          <h2 className="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-primary mb-4 overflow-hidden">
+          <h2 className="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-primary mb-4" style={{ minHeight: '2em', overflow: 'visible' }}>
             <AnimatedTitle text="Featured Projects" delay={0.5} isInView={isInView} />
           </h2>
 
@@ -238,32 +237,32 @@ const Projects = () => {
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => {
-            const gradient = index % 2 === 0 
-              ? "from-primary/20 to-primary/5" 
+            const gradient = index % 2 === 0
+              ? "from-primary/20 to-primary/5"
               : "from-secondary/20 to-secondary/5";
-            
+
             return (
               <motion.div
                 key={project._id}
-                initial={{ 
-                  opacity: 0, 
+                initial={{
+                  opacity: 0,
                   y: 80,
                   rotateY: index % 2 === 0 ? -15 : 15,
                   scale: 0.85,
                 }}
-                animate={isInView ? { 
-                  opacity: 1, 
+                animate={isInView ? {
+                  opacity: 1,
                   y: 0,
                   rotateY: 0,
                   scale: 1,
                 } : {}}
-                transition={{ 
+                transition={{
                   type: "spring",
                   damping: 20,
                   stiffness: 90,
-                  delay: 2.2 + index * 0.2 
+                  delay: 2.2 + index * 0.2
                 }}
-                whileHover={{ 
+                whileHover={{
                   y: -12,
                   scale: 1.02,
                   transition: { type: "spring", stiffness: 300 }
@@ -271,7 +270,7 @@ const Projects = () => {
                 className="group relative perspective-1000"
               >
                 {/* Animated glow background */}
-                <motion.div 
+                <motion.div
                   className={`absolute inset-0 bg-gradient-to-br ${gradient} rounded-3xl blur-xl`}
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
@@ -311,7 +310,7 @@ const Projects = () => {
                     />
                   ))}
                 </motion.div>
-                
+
                 <div className="relative bg-card/30 backdrop-blur-sm border border-primary/20 rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 h-full flex flex-col">
                   {/* Shine sweep effect */}
                   <motion.div
@@ -322,41 +321,41 @@ const Projects = () => {
                   />
 
                   {/* Project image with reveal animation */}
-                  <motion.div 
+                  <motion.div
                     className="relative w-full h-56 overflow-hidden"
                     initial={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" }}
                     animate={isInView ? { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" } : {}}
                     transition={{ duration: 0.8, delay: 2.4 + index * 0.2 }}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-20`} />
-                    <motion.img 
-                      src={project.image ? urlFor(project.image.asset).url() : "/placeholder.jpg"} 
+                    <motion.img
+                      src={project.image ? urlFor(project.image.asset).url() : "/placeholder.jpg"}
                       alt={project.title}
                       className="w-full h-full object-cover"
                       whileHover={{ scale: 1.15 }}
                       transition={{ duration: 0.7 }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent" />
-                    
+
                     {/* Floating project number badge */}
                     <motion.div
                       className="absolute top-4 right-4 w-10 h-10 rounded-full bg-primary/80 backdrop-blur-sm flex items-center justify-center text-primary-foreground font-bold text-sm"
                       initial={{ scale: 0, rotate: -180 }}
                       animate={isInView ? { scale: 1, rotate: 0 } : {}}
-                      transition={{ 
-                        type: "spring", 
-                        damping: 15, 
-                        delay: 2.6 + index * 0.2 
+                      transition={{
+                        type: "spring",
+                        damping: 15,
+                        delay: 2.6 + index * 0.2
                       }}
                       whileHover={{ scale: 1.2, rotate: 15 }}
                     >
                       {String(index + 1).padStart(2, '0')}
                     </motion.div>
                   </motion.div>
-                  
+
                   <div className="p-8 flex flex-col flex-grow">
                     {/* Animated title */}
-                    <motion.h3 
+                    <motion.h3
                       className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors duration-300"
                       initial={{ opacity: 0, x: -20 }}
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -364,9 +363,9 @@ const Projects = () => {
                     >
                       {project.title}
                     </motion.h3>
-                    
+
                     {/* Description with fade-in */}
-                    <motion.p 
+                    <motion.p
                       className="text-muted-foreground leading-relaxed mb-6 flex-grow"
                       initial={{ opacity: 0 }}
                       animate={isInView ? { opacity: 1 } : {}}
@@ -388,7 +387,7 @@ const Projects = () => {
                             damping: 15,
                             delay: 2.8 + index * 0.2 + tagIndex * 0.05,
                           }}
-                          whileHover={{ 
+                          whileHover={{
                             scale: 1.1,
                             backgroundColor: "hsl(var(--primary) / 0.25)",
                             boxShadow: "0 0 15px rgba(6,182,212,0.4)",
@@ -400,14 +399,14 @@ const Projects = () => {
                     </div>
 
                     {/* Animated buttons */}
-                    <motion.div 
+                    <motion.div
                       className="flex gap-4"
                       initial={{ opacity: 0, y: 20 }}
                       animate={isInView ? { opacity: 1, y: 0 } : {}}
                       transition={{ delay: 3 + index * 0.2 }}
                     >
                       {project.repoLink && (
-                        <motion.div 
+                        <motion.div
                           className="flex-1"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
@@ -429,7 +428,7 @@ const Projects = () => {
                         </motion.div>
                       )}
                       {project.liveLink && (
-                        <motion.div 
+                        <motion.div
                           className="flex-1"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
@@ -467,10 +466,10 @@ const Projects = () => {
                     animate={isInView ? {
                       rotate: [0, 360],
                     } : {}}
-                    transition={{ 
-                      duration: 12, 
-                      repeat: Infinity, 
-                      ease: "linear" 
+                    transition={{
+                      duration: 12,
+                      repeat: Infinity,
+                      ease: "linear"
                     }}
                   >
                     <Code2 className="w-6 h-6" />

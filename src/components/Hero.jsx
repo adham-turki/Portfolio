@@ -23,9 +23,9 @@ const AnimatedText = ({ text, className, delay = 0 }) => {
   const letterAnimation = {
     hidden: {
       opacity: 0,
-      y: 100,
+      y: 30,
       rotateX: -90,
-      scale: 0.5,
+      scale: 0.8,
     },
     visible: (i) => ({
       opacity: 1,
@@ -44,6 +44,7 @@ const AnimatedText = ({ text, className, delay = 0 }) => {
   return (
     <motion.span
       className={`inline-flex flex-wrap justify-center ${className}`}
+      style={{ minHeight: '1.2em' }}
       variants={container}
       initial="hidden"
       animate="visible"
@@ -405,7 +406,8 @@ const Hero = () => {
 
         {/* Legendary Animated Title with Letter-by-Letter Reveal */}
         <motion.div
-          className="mb-6 overflow-hidden"
+          className="mb-6"
+          style={{ minHeight: '2em', overflow: 'visible' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}

@@ -10,7 +10,7 @@ const AnimatedTitle = ({ text, className, delay = 0, isInView }) => {
   const words = text.split(" ");
 
   return (
-    <motion.span className={`inline-flex flex-wrap ${className}`}>
+    <motion.span className={`inline-flex flex-wrap ${className}`} style={{ minHeight: '1.2em' }}>
       {words.map((word, wordIndex) => (
         <span key={wordIndex} className="inline-flex mr-[0.25em]">
           {word.split("").map((letter, letterIndex) => (
@@ -19,9 +19,9 @@ const AnimatedTitle = ({ text, className, delay = 0, isInView }) => {
               className="inline-block"
               initial={{
                 opacity: 0,
-                y: 80,
+                y: 30,
                 rotateX: -90,
-                scale: 0.5,
+                scale: 0.8,
               }}
               animate={isInView ? {
                 opacity: 1,
@@ -404,7 +404,7 @@ const About = () => {
               </motion.div>
 
               {/* Animated title with letter-by-letter reveal */}
-              <h2 className="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-primary overflow-hidden">
+              <h2 className="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-primary" style={{ minHeight: '2em', overflow: 'visible' }}>
                 <AnimatedTitle
                   text="Turning Ideas"
                   delay={0.9}
