@@ -412,11 +412,11 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
         >
-          <GlitchText className="text-6xl md:text-8xl lg:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-foreground to-secondary bg-200 animate-gradient-shift">
+          <GlitchText className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-foreground to-secondary bg-200 animate-gradient-shift">
             <AnimatedText
               text="Hi, I'm Adham"
               delay={1}
-              className="text-6xl md:text-8xl lg:text-9xl font-bold"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-bold"
             />
           </GlitchText>
         </motion.div>

@@ -28,18 +28,25 @@ const Navigation = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-primary/20"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled
+        ? "bg-background/80 backdrop-blur-xl border-b border-primary/20"
+        : "bg-transparent"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Mobile Menu Button - Left on mobile */}
+          <button
+            className="md:hidden text-foreground"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
+          {/* Logo - Right on mobile, Left on desktop */}
           <motion.a
             href="#"
-            className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary"
+            className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary md:order-first order-last"
             whileHover={{ scale: 1.05 }}
             onClick={(e) => {
               e.preventDefault();
@@ -49,7 +56,7 @@ const Navigation = () => {
             Adham
           </motion.a>
 
-          {/* Desktop Menu */}
+          {/* Desktop Menu - Hidden on mobile */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item, index) => (
               <motion.a
@@ -59,8 +66,12 @@ const Navigation = () => {
                 whileHover={{ y: -2 }}
                 onClick={(e) => {
                   e.preventDefault();
-                  const target = document.querySelector(item.href);
-                  target?.scrollIntoView({ behavior: "smooth" });
+                  if (item.href === "#") {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  } else {
+                    const target = document.querySelector(item.href);
+                    target?.scrollIntoView({ behavior: "smooth" });
+                  }
                 }}
               >
                 {item.name}
@@ -69,13 +80,8 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-foreground"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Spacer for desktop layout */}
+          <div className="hidden md:block"></div>
         </div>
 
         {/* Mobile Menu */}
@@ -96,8 +102,12 @@ const Navigation = () => {
                 transition={{ delay: index * 0.1 }}
                 onClick={(e) => {
                   e.preventDefault();
-                  const target = document.querySelector(item.href);
-                  target?.scrollIntoView({ behavior: "smooth" });
+                  if (item.href === "#") {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  } else {
+                    const target = document.querySelector(item.href);
+                    target?.scrollIntoView({ behavior: "smooth" });
+                  }
                   setIsOpen(false);
                 }}
               >

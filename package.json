@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -21,7 +21,6 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.17",
     "lucide-react": "^0.462.0",
-    "next": "^15.0.3",
     "portfolio": "file:",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
