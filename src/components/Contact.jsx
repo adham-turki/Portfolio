@@ -19,14 +19,14 @@ const Contact = () => {
     {
       icon: Phone,
       label: "Phone",
-      value: "Available on request",
-      href: "#",
+      value: "+975 59-793-6306",
+      href: "tel:+975597936306",
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "Available for remote work",
-      href: "#",
+      value: "Ramallah, Palestine",
+      href: "https://www.google.com/maps/place/Ramallah,+West+Bank",
     },
   ];
 
