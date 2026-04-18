@@ -547,7 +547,7 @@ const Hero = () => {
           {[
             { href: "https://github.com/adham-turki", icon: Github, label: "GitHub" },
             { href: "https://linkedin.com/in/adham-turki-54b723313", icon: Linkedin, label: "LinkedIn" },
-            { href: "mailto:adham@example.com", icon: Mail, label: "Email" },
+            { href: "mailto:adhamibraheem321@gmail.com", icon: Mail, label: "Email" },
           ].map((social, index) => (
             <motion.a
               key={social.label}
