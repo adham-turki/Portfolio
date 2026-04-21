@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-
+const delay = 2;
   const contactInfo = [
     {
       icon: Mail,
