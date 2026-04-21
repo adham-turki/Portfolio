@@ -717,7 +717,7 @@ const Hero = () => {
               className="relative overflow-hidden bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] group"
               onClick={() =>
                 window.open(
-                  "https://drive.google.com/file/d/1Itina7JFeC4qCMMGq3AdiVGoQdGAO734/view?usp=sharing",
+                  "https://drive.google.com/file/d/1IVIh0kQVEMDdg16QbL4Q2EhZTXTSBUCA/view?usp=sharing",
                   "_blank",
                 )
               }
